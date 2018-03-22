@@ -12,7 +12,7 @@ export default class ListItem extends Component {
       <li className={styles.listItem}>
         {
           this.props.data.map(paramValue => {
-            return (<span>{paramValue}</span> );
+            return (<span className={styles.listField}>{paramValue}</span> );
           })
         }        
       </li>

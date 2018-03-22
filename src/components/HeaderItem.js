@@ -17,11 +17,12 @@ export default class HeaderItem extends Component {
         {
           fields.map((field, index) => {
             return (<span
+              className={styles.listField}
               key={field}
               onClick={() => onFieldClick(index)} >
               {field}
               {index === sortByField && (
-                <span>{sortAsc ? (<b>&uarr;</b>) : (<b>&darr; </b>)}</span>
+                <i>{sortAsc ? (<b>&uarr;</b>) : (<b>&darr; </b>)}</i>
               )}
               </span> );
           })
