@@ -1,28 +1,32 @@
 import React, { Component } from 'react';
-import { combineReducers } from 'redux';
+import { compose, createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-
-import { createStore, renderDevTools } from '../store_enhancers/devTools';
-
 import SortableTableApp from './SortableTableApp';
 import * as reducers from '../reducers';
 
-const reducer = combineReducers(reducers);
-const store = createStore(
-    reducer,
-    reducers.initialState,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()  
-  );
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage';
 
-export default class App extends Component {
+const rootReducer = combineReducers(reducers);
+
+const persistConfig = {
+  key: 'root',
+  storage: storage
+};
+
+const store = createStore(
+  persistReducer(persistConfig, rootReducer)
+);
+
+const persistor = persistStore(store);
+
+export default class App extends React.Component {
   render() {
     return (
       <div>
         <Provider store={store}>
-          {() => <SortableTableApp /> }
+            {() => <SortableTableApp /> }
         </Provider>
-
-        {renderDevTools(store)}
       </div>
     );
   }
