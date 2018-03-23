@@ -4,7 +4,7 @@ import styles from './LoadFileInput.css';
 
 export default class LoadFileInput extends Component {
   static propTypes = {
-    addItem: PropTypes.func.isRequired
+    loadFromFile: PropTypes.func.isRequired
   }
 
   constructor (props, context) {
@@ -18,7 +18,7 @@ export default class LoadFileInput extends Component {
 
   handleFileChange(selectorFiles: FileList) {
       let reader = new FileReader();
-      
+      this.props.loadFromFile('');
       reader.onload = e => this.props.loadFromFile(e.target.result);
       reader.onerror = this.errorHandler;
       reader.readAsText(selectorFiles[0]);          

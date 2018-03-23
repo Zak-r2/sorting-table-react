@@ -4,8 +4,8 @@ import styles from './ListItem.css';
 
 export default class HeaderItem extends Component {
   static propTypes = {
-    sortingFieldIndex: PropTypes.number.isRequired,
-    sortDirectionAsc: PropTypes.boolean,
+    sortByField: PropTypes.number.isRequired,
+    sortAsc: PropTypes.boolean,
     fields: PropTypes.array,
     onFieldClick: PropTypes.func.isRequired
   }
@@ -13,7 +13,7 @@ export default class HeaderItem extends Component {
   render () {
     const { fields, sortByField, sortAsc, onFieldClick} = this.props;
     return (
-      <li className={styles.listItem}>
+      <li className={styles.listHeaderItem}>
         {
           fields.map((field, index) => {
             return (<span

@@ -7,12 +7,16 @@ import HeaderItem from './HeaderItem';
 
 export default class List extends Component {
   static propTypes = {
-    items: PropTypes.object.isRequired,
-    actions: PropTypes.object.isRequired
+    items: PropTypes.array.isRequired,
+    fields: PropTypes.array.isRequired,
+    actions: PropTypes.any.isRequired,
+    sortByField: PropTypes.number.isRequired,
+    sortAsc: PropTypes.boolean
   }
 
   render () {
     const { items, fields, sortByField, sortAsc, actions } = this.props;
+
     return (
       <ul className={styles.list}>
         <HeaderItem 
@@ -22,12 +26,8 @@ export default class List extends Component {
           onFieldClick={actions.sortByField}
         />        
         {
-          this.props.items.map(item => {
-            return (<ListItem
-              data={item} />);
-          })
-        }    
-
+          items.map(item => (<ListItem data={item} />))          
+        }
       </ul>
     );
   }
